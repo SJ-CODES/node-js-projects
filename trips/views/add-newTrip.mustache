@@ -1,0 +1,32 @@
+<html>
+    <head> 
+    </head>
+
+    <body>
+            <h1>Trips 2021</h1>
+        <form method="POST" action="/add-newTrip">
+            <input type="text" placeholder="Enter Title" name="title" />       
+            <input type="date" placeholder="Enter Leave Date" name="leave" />       
+            <input type="date" placeholder="Enter Return Date" name="returnDate" />       
+            <input type="text" placeholder="Enter Image URL" name="image" />      
+                 
+            <button>Add</button>
+         </form>
+        
+        <ul>
+            {{#allTrips}}
+                    <li>
+                        <h2>
+                        {{title}}<br>
+                        {{leave}}<br>
+                        {{returnDate}}<br>
+                        </h2>
+                        <img src="{{image}}"/>
+                    </li>
+
+            {{/allTrips}}
+        
+        </ul>
+    </body>
+
+</html>
