@@ -6,7 +6,16 @@ app.engine('mustache', mustacheExpress())
 app.set('views', './views')
 app.set('view engine', 'mustache')
 
+
+
 app.use(express.urlencoded())
+
+// const tripsRouter = require('./routes/trips')
+
+
+
+
+// app.use("/trips, tripsRouter")
 
 
 let trips = []

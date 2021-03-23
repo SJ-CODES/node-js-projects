@@ -1,0 +1,62 @@
+<html>
+    <head> 
+
+    <link rel="stylesheet" href="/css/style.css">
+    </head>
+
+    <body>
+        <h1 id="title">Blog About It</h1>
+
+        
+            <form method="POST" action="/">
+                <input type="text" placeholder="Enter Title" name="title" />       
+                <input type="text" placeholder="Enter body" name="body" />  
+                <label>Is Published</label> <input type="checkbox" name="is_published" />     
+                <button>Add</button>
+            </form>
+
+        <h2 id=blog_posts>
+            {{#blogs}}
+                
+                    {{title}} <br>
+                    {{body}} <br>
+                    {{date_created}} <br>
+                    {{date_updated}} <br>
+                    {{is_published}} <br>
+                
+
+            {{/blogs}}
+        </h2>
+           
+                
+            <h2>
+                {{#allBlogs}}
+                        
+                            
+                                
+                                <form method = "POST" action = "/delete-Blog">
+                                    <input type="hidden" value={{post_id}} name="post_id" />
+                                    <label>
+                                        {{title}} <br>
+                                        {{body}} <br>
+                                        {{date_created}} <br>
+                                        {{date_updated}} <br>
+                                        {{is_published}} <br>
+                                    </label>
+                                    <button>Delete</button>
+                                </form>
+
+                        
+                        
+                        
+                        
+                        
+
+                {{/allBlogs}}
+            
+            <h2>
+
+       
+    </body>
+
+</html>

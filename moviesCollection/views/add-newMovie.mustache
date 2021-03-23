@@ -1,0 +1,48 @@
+<html>
+    <head> 
+        
+    </head>
+
+    <body>
+            <h1>Movies Collection</h1>
+        <form method="POST" action="/movies/add-newMovie">
+            <input type="text" placeholder="Enter Title" name="title" />       
+            <input type="text" placeholder="Enter Description" name="description" />       
+            <input type="text" placeholder="Enter Genre" name="genre" />       
+            <input type="text" placeholder="Enter Poster URL" name="posterURL" />      
+                 
+            <button>Add</button>
+             
+        </form>
+        
+        <ul>
+            {{#allMovies}}
+                    <li>
+                        <h2>
+                            
+                            <form method = "POST" action="/delete-Movie">
+                                <input type="hidden" value={{movieId}} name="movieId" />
+                                    <label>
+                                        {{title}}<br>
+                                        {{description}}<br>
+                                        {{genre}}
+                                    </label>
+                                <button>Delete</button>
+                            </form>
+
+                    
+                        </h2>
+                      
+                        <img src="{{posterURL}}"/>
+                    </li>
+
+            {{/allMovies}}
+        
+        </ul>
+
+        <a href="/chat">
+           <button> Chat </button>
+        </a>
+    </body>
+
+</html>

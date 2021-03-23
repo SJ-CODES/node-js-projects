@@ -4,6 +4,7 @@ const cors = require('cors')
 
 let todos = []
 
+
 app.use(cors()) // CORS enabled on the server 
 // Tell express how to parse JSON body 
 app.use(express.json()) // MIDDLEWARE 

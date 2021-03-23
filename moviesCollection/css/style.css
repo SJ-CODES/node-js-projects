@@ -1,0 +1,24 @@
+body{
+    background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlxW-vBgUbgqd0oaWq--F3Bj8dAqcDiXCMRg&usqp=CAU');
+    background-size: auto;
+    color:black;
+    text-align: center;
+
+    
+}
+
+#title {
+    text-align: center;
+    background-color:yellow;
+    width: 400px;
+    height: 50px;
+}
+
+#messagesUL{
+    text-align: center;
+    background-color: yellow;
+   padding-left: 150px;
+   padding-inline-start: 0px;
+   margin-left: 400px;
+   margin-right: 400px;
+}
