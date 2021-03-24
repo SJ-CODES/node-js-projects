@@ -1,11 +1,13 @@
 <html>
     <head> 
+
+    
         
     </head>
 
     <body>
             <h1>Movies Collection</h1>
-        <form method="POST" action="/movies/add-newMovie">
+        <form method="POST" action="/add-newMovie">
             <input type="text" placeholder="Enter Title" name="title" />       
             <input type="text" placeholder="Enter Description" name="description" />       
             <input type="text" placeholder="Enter Genre" name="genre" />       
@@ -20,7 +22,7 @@
                     <li>
                         <h2>
                             
-                            <form method = "POST" action="/delete-Movie">
+                            <form method = "POST" action="/deleteMovie">
                                 <input type="hidden" value={{movieId}} name="movieId" />
                                     <label>
                                         {{title}}<br>

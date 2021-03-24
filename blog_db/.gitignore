@@ -1,4 +1,4 @@
 node_modules
-register.mustache
 DS_STORE
 index.html
+package-lock.json

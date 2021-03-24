@@ -5,7 +5,13 @@ const http = require('http').Server(app)
 const io = require('socket.io')(http)
 const mustacheExpress = require('mustache-express')
 
+var session = require('express-session')
 
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+  }))
 
 
 app.use('/js', express.static('js'))
@@ -47,11 +53,11 @@ global.movies = []
 
 
 const rootLogin = require("./routes/login")
-const moviesController = require("./routes/movies");
+
 
 
 app.use("/", rootLogin)
-app.use("/movies", moviesController)
+
 
 
 

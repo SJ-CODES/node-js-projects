@@ -25,7 +25,7 @@ router.post("/login", (req, res)=>{
                 }
         
                  
-                res.redirect(movies)
+                res.redirect('/')
         
             } else { 
                 res.render("login", {message: "Username or password is incorrect"})
@@ -46,6 +46,41 @@ router.post("/register", (req, res) =>{
     res.render("login")
 
 })
+
+
+router.get('/add-newMovie', (req, res) => { 
+    res.redirect("/add-newMovie")
+})
+
+
+
+
+
+
+router.post('/add-newMovie', (req, res) => {
+    const title = req.body.title
+    const description = req.body.description
+    const genre = req.body.genre
+    const posterURL = req.body.posterURL
+    const movieId = uuidv4()
+
+    let movie ={title: title, description: description, genre: genre, posterURL: posterURL, movieId: movieId}
+    movies.push(movie)
+    console.log(movies)
+
+    res.render("add-newMovie",{allMovies:movies})
+})
+
+router.post('/deleteMovie', (req, res)=> {
+    const movieId = req.body.movieId
+    
+    movies = movies.filter((movie) => {
+        return movie.movieId != movieId 
+    })
+
+    res.render("add-newMovie")
+})
+
 
 
 

@@ -3,9 +3,13 @@ const express = require('express')
 const router = express.Router()
 const pgp = require('pg-promise')() 
 
- 
+var bcrypt = require('bcryptjs');
+
+
 const connectionString = 'postgres://localhost:5432/booksdb'
 const db = pgp(connectionString)
+
+
 
 
 router.get('/', (req, res) => {
@@ -15,13 +19,47 @@ router.get('/', (req, res) => {
      })
  })
  
-router.get('/', (req, res) => {
-    res.render('index')
+router.get('/register',  (req, res) => {
+    res.render('register')
 })
 
-router.get('/delete-blog', (req, res) =>{
-    res.redirect('/')
+router.get('/login', (req, res) =>{
+    res.render('login')
 })
+
+router.post('/login', (req, res) => {
+
+
+    const username = req.body.username;
+    const password = req.body.password;
+
+    db.one('SELECT user_id, username, password FROM users WHERE username = $1', [username])
+        .then((user) => {
+            bcrypt.compare(password, user.password, function (error, result) {
+                if (result) {
+                    
+                    if(req.session) {
+                        req.session.userId = user.user_id 
+                        req.session.username = user.username 
+                        
+                      
+
+                        res.redirect('/')
+                    }
+                    
+                } else {
+                    res.send('Invalid password')
+                }
+            })
+
+        }).catch((error) => {
+            console.log(error)
+            res.send('User not found!')
+        })
+   
+})
+
+
 
 router.post('/', (req, res) => {
 
@@ -38,15 +76,32 @@ router.post('/', (req, res) => {
     }) 
 })
 
-router.post('/delete-blog',(req,res) => {
+router.post('/register', (req, res) => {
 
-    const post_id = req.body.post_id 
+    const username = req.body.username;
+    const password = req.body.password;
 
-    db.none('DELETE FROM books WHERE post_id = $1;',[post_id])
-        .then(() => {
-            res.redirect('/')
+    bcrypt.genSalt(10, function (error, salt) {
+        bcrypt.hash(password, salt, function (error, hash) { 
+            if (!error) {
+                db.none('INSERT INTO users(username, password) VALUES($1, $2)', [username, hash])
+                    .then(() => {
+                        res.send('User Registered')
+                    })
+            }
         })
+    })
 })
+
+// router.post('/delete-blog',(req,res) => {
+
+//     const post_id = req.body.post_id 
+
+//     db.none('DELETE FROM books WHERE post_id = $1;',[post_id])
+//         .then(() => {
+//             res.redirect('/')
+//         })
+// })
 
 
  module.exports = router
